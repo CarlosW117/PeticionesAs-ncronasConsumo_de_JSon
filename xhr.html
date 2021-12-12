@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Germany</title>
+</head>
+<body>
+<h1>Usando la Api Fetch Java Script</h1>  
+<h2>"Elegir un boton"</h2>
+<h3>Carlos Yolatl Joshua Montero Cortez</h3>
+<div id="demo">
+<button type="button" onclick="nombreP()">Pais</button>
+<button type="button" onclick="mexico()">Bandera</button>
+</div>
+
+<script>
+  function nombreP(){
+    
+
+fetch("https://restcountries.com/v3.1/name/germany" )
+    .then(response => response.json())
+    .then(function(data) {
+      //console.log(data[0].name.common);
+      body = document.getElementsByTagName("body")[0];
+      nombre = document.createElement('h1');
+      nombre.innerHTML = data[0].name.common;
+      body.appendChild(nombre);
+    }); 
+
+  }
+  function mexico(){
+  /*const imageUrl = "https://flagcdn.com/es/codes.json";
+
+const reader = new FileReader();
+reader.onloadend = () => {
+  const base64data = reader.result;                
+  console.log(base64data);
+}
+(async () => {
+  const response = await fetch(imageUrl)
+  const imageBlob = await response.blob()
+  reader.readAsDataURL(imageBlob);
+  document.getElementsByTagName('body')[0].appendChild(bandera);
+})()*/
+fetch('https://flagcdn.com/de.svg')
+  .then(res => res.blob())
+  .then(blob => {
+    let objectURL = URL.createObjectURL(blob);
+    let bandera = new Image();
+    bandera.src = objectURL;
+    document.getElementsByTagName('body')[0].appendChild(bandera);
+});
+}
+/*
+  let respJson = {};
+function loadXMLDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    	//respJson = JSON.parse(this.responseText);
+      //document.getElementById("demo").innerHTML = respJson[0].name.common;
+      document.getElementById("demo").innerHTML = this.response;
+    }
+  };
+  xhttp.open("GET", "https://flagcdn.com/256x192/fr.png", true);
+  xhttp.send();
+  
+}
+*/
+</script>
+
+</body>
+</html>
